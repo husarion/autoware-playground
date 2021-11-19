@@ -41,6 +41,8 @@ def generate_launch_description():
         panther_autoware_demo_pkg_prefix, 'custom_params/mpc_sim.param.yaml')
     pc_filter_transform_param_file = os.path.join(
         panther_autoware_demo_pkg_prefix, 'custom_params/pc_filter_transform.param.yaml')
+    vehicle_characteristics_param_file = os.path.join(
+        panther_autoware_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
@@ -49,14 +51,11 @@ def generate_launch_description():
         avp_demo_pkg_prefix, 'param/avp/map_publisher_sim.param.yaml')
     ndt_localizer_param_file = os.path.join(
         avp_demo_pkg_prefix, 'param/avp/ndt_localizer_sim.param.yaml')
-    vehicle_characteristics_param_file = os.path.join(
-        avp_demo_pkg_prefix, 'param/vehicle_characteristics.param.yaml')
+
 
     urdf_path = os.path.join(panther_autoware_demo_pkg_prefix, 'urdf/panther.urdf')
     with open(urdf_path, 'r') as infp:
         urdf_file = infp.read()
-    
-    print("loaded: " + urdf_file)
 
     # Arguments
 
@@ -120,14 +119,6 @@ def generate_launch_description():
         parameters=[LaunchConfiguration('pc_filter_transform_param_file')],
         remappings=[("points_in", "points_xyzi")]
     )
-    filter_transform_vlp16_rear = Node(
-        package='point_cloud_filter_transform_nodes',
-        executable='point_cloud_filter_transform_node_exe',
-        name='filter_transform_vlp16_rear',
-        namespace='lidar_rear',
-        parameters=[LaunchConfiguration('pc_filter_transform_param_file')],
-        remappings=[("points_in", "points_xyzi")]
-    )
     map_publisher = Node(
         package='ndt_nodes',
         executable='ndt_map_publisher_exe',
@@ -163,7 +154,7 @@ def generate_launch_description():
     )
 
     core_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([avp_demo_pkg_prefix, '/launch/avp_core.launch.py']),
+        PythonLaunchDescriptionSource([panther_autoware_demo_pkg_prefix, '/launch/avp_core.launch.py']),
         launch_arguments={}.items()
     )
 
@@ -189,7 +180,6 @@ def generate_launch_description():
         ndt_localizer,
         mpc,
         filter_transform_vlp16_front,
-        filter_transform_vlp16_rear,
         core_launch,
         adapter_launch,
     ])

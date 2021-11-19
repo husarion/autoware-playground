@@ -28,4 +28,5 @@ ament_auto_package(
     custom_params
     meshes
     urdf
+    rviz
 )

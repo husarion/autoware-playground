@@ -32,8 +32,8 @@ def generate_launch_description():
      * rosbridge_server
     """
 
-    rviz_cfg_path = os.path.join(get_package_share_directory('autoware_auto_launch'),
-                                 'config', 'avp.rviz')
+    rviz_cfg_path = os.path.join(get_package_share_directory('panther_autoware_demo'),
+                                 'rviz', 'config.rviz')
 
     # Arguments
     with_rviz_param = DeclareLaunchArgument(
