@@ -15,7 +15,7 @@
 # Co-developed by Tier IV, Inc. and Apex.AI, Inc.
 cmake_minimum_required(VERSION 3.5)
 
-project(panther_autoware_demo)
+project(panther_sim_demo)
 
 # dependencies
 find_package(ament_cmake_auto REQUIRED)

@@ -34,12 +34,12 @@ def generate_launch_description():
     be found at https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/milestones/25.
     """
     avp_demo_pkg_prefix = get_package_share_directory('autoware_demos')
-    panther_autoware_demo_pkg_prefix = get_package_share_directory('panther_autoware_demo')
+    panther_sim_demo_pkg_prefix = get_package_share_directory('panther_sim_demo')
     autoware_launch_pkg_prefix = get_package_share_directory('autoware_auto_launch')
 
     ## CUSTOM PARAMS
     vehicle_characteristics_param_file = os.path.join(
-        panther_autoware_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
+        panther_sim_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
     
 
     euclidean_cluster_param_file = os.path.join(
@@ -243,26 +243,26 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        euclidean_cluster_param,
-        ray_ground_classifier_param,
-        scan_downsampler_param,
-        with_obstacles_param,
+        # euclidean_cluster_param,
+        # ray_ground_classifier_param,
+        # scan_downsampler_param,
+        # with_obstacles_param,
         lanelet2_map_provider_param,
-        lane_planner_param,
-        parking_planner_param,
-        object_collision_estimator_param,
-        behavior_planner_param,
-        off_map_obstacles_filter_param,
-        vehicle_characteristics_param,
-        euclidean_clustering,
-        ray_ground_classifier,
-        scan_downsampler,
+        # lane_planner_param,
+        # parking_planner_param,
+        # object_collision_estimator_param,
+        # behavior_planner_param,
+        # off_map_obstacles_filter_param,
+        # vehicle_characteristics_param,
+        # euclidean_clustering,
+        # ray_ground_classifier,
+        # scan_downsampler,
         lanelet2_map_provider,
         lanelet2_map_visualizer,
-        global_planner,
-        lane_planner,
-        parking_planner,
-        object_collision_estimator,
-        behavior_planner,
-        off_map_obstacles_filter,
+        # global_planner,
+        # lane_planner,
+        # parking_planner,
+        # object_collision_estimator,
+        # behavior_planner,
+        # off_map_obstacles_filter,
     ])

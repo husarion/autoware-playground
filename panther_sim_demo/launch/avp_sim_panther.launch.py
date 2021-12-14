@@ -33,16 +33,16 @@ def generate_launch_description():
     be found at https://gitlab.com/autowarefoundation/autoware.auto/AutowareAuto/-/milestones/25.
     """
     avp_demo_pkg_prefix = get_package_share_directory('autoware_demos')
-    panther_autoware_demo_pkg_prefix = get_package_share_directory('panther_autoware_demo')
+    panther_sim_demo_pkg_prefix = get_package_share_directory('panther_sim_demo')
     autoware_launch_pkg_prefix = get_package_share_directory('autoware_auto_launch')
 
     ## CUSTOM PARAMS
     mpc_param_file = os.path.join(
-        panther_autoware_demo_pkg_prefix, 'custom_params/mpc_sim.param.yaml')
+        panther_sim_demo_pkg_prefix, 'custom_params/mpc_sim.param.yaml')
     pc_filter_transform_param_file = os.path.join(
-        panther_autoware_demo_pkg_prefix, 'custom_params/pc_filter_transform.param.yaml')
+        panther_sim_demo_pkg_prefix, 'custom_params/pc_filter_transform.param.yaml')
     vehicle_characteristics_param_file = os.path.join(
-        panther_autoware_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
+        panther_sim_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
@@ -53,7 +53,7 @@ def generate_launch_description():
         avp_demo_pkg_prefix, 'param/avp/ndt_localizer_sim.param.yaml')
 
 
-    urdf_path = os.path.join(panther_autoware_demo_pkg_prefix, 'urdf/panther.urdf')
+    urdf_path = os.path.join(panther_sim_demo_pkg_prefix, 'urdf/panther.urdf')
     with open(urdf_path, 'r') as infp:
         urdf_file = infp.read()
 
@@ -154,7 +154,7 @@ def generate_launch_description():
     )
 
     core_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([panther_autoware_demo_pkg_prefix, '/launch/avp_core.launch.py']),
+        PythonLaunchDescriptionSource([panther_sim_demo_pkg_prefix, '/launch/avp_core.launch.py']),
         launch_arguments={}.items()
     )
 
@@ -168,18 +168,18 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        lgsvl_interface_param,
+        # lgsvl_interface_param,
         map_publisher_param,
-        ndt_localizer_param,
-        mpc_param,
-        pc_filter_transform_param,
-        vehicle_characteristics_param,
-        urdf_publisher,
-        lgsvl_interface,
+        # ndt_localizer_param,
+        # mpc_param,
+        # pc_filter_transform_param,
+        # vehicle_characteristics_param,
+        # urdf_publisher,
+        # lgsvl_interface,
         map_publisher,
-        ndt_localizer,
-        mpc,
-        filter_transform_vlp16_front,
+        # ndt_localizer,
+        # mpc,
+        # filter_transform_vlp16_front,
         core_launch,
-        adapter_launch,
+        # adapter_launch,
     ])
