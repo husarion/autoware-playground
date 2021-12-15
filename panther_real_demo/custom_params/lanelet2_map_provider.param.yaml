@@ -5,7 +5,7 @@
    ros__parameters:
    #   map_osm_file: "/opt/AutowareAuto/share/autoware_demos/data/autonomoustuff_parking_lot.osm"
    #   map_osm_file: "/home/nicolas/AutowareAuto/src/launch/autoware_demos/data/autonomoustuff_parking_lot_exported.osm"
-     map_osm_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/pod_biurem_lanelet_map_moved.osm"
+     map_osm_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/pod_biurem_lanelet_map_FINAL.osm"
     #  map_osm_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/pod_biurem_lanelet_map_original.osm"
 
 
