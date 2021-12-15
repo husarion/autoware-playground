@@ -41,6 +41,8 @@ def generate_launch_description():
     vehicle_characteristics_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
     
+    lanelet2_map_provider_param_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'custom_params/lanelet2_map_provider.param.yaml')
 
     euclidean_cluster_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/euclidean_cluster.param.yaml')
@@ -48,9 +50,6 @@ def generate_launch_description():
         autoware_launch_pkg_prefix, 'param/ray_ground_classifier.param.yaml')
     scan_downsampler_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/scan_downsampler.param.yaml')
-
-    lanelet2_map_provider_param_file = os.path.join(
-        avp_demo_pkg_prefix, 'param/avp/lanelet2_map_provider.param.yaml')
 
     lane_planner_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lane_planner.param.yaml')
@@ -243,26 +242,26 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        # euclidean_cluster_param,
-        # ray_ground_classifier_param,
-        # scan_downsampler_param,
-        # with_obstacles_param,
+        euclidean_cluster_param,
+        ray_ground_classifier_param,
+        scan_downsampler_param,
+        with_obstacles_param,
         lanelet2_map_provider_param,
-        # lane_planner_param,
-        # parking_planner_param,
-        # object_collision_estimator_param,
-        # behavior_planner_param,
-        # off_map_obstacles_filter_param,
-        # vehicle_characteristics_param,
-        # euclidean_clustering,
-        # ray_ground_classifier,
-        # scan_downsampler,
+        lane_planner_param,
+        parking_planner_param,
+        object_collision_estimator_param,
+        behavior_planner_param,
+        off_map_obstacles_filter_param,
+        vehicle_characteristics_param,
+        euclidean_clustering,
+        ray_ground_classifier,
+        scan_downsampler,
         lanelet2_map_provider,
         lanelet2_map_visualizer,
-        # global_planner,
-        # lane_planner,
-        # parking_planner,
-        # object_collision_estimator,
-        # behavior_planner,
-        # off_map_obstacles_filter,
+        global_planner,
+        lane_planner,
+        parking_planner,
+        object_collision_estimator,
+        behavior_planner,
+        off_map_obstacles_filter,
     ])

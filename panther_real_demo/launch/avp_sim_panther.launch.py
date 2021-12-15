@@ -43,12 +43,11 @@ def generate_launch_description():
         panther_real_demo_pkg_prefix, 'custom_params/pc_filter_transform.param.yaml')
     vehicle_characteristics_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
+    map_publisher_param_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'custom_params/map_publisher.param.yaml')
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
-
-    map_publisher_param_file = os.path.join(
-        avp_demo_pkg_prefix, 'param/avp/map_publisher_sim.param.yaml')
     ndt_localizer_param_file = os.path.join(
         avp_demo_pkg_prefix, 'param/avp/ndt_localizer_sim.param.yaml')
 
@@ -168,18 +167,18 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        # lgsvl_interface_param,
+        lgsvl_interface_param,
         map_publisher_param,
-        # ndt_localizer_param,
-        # mpc_param,
-        # pc_filter_transform_param,
-        # vehicle_characteristics_param,
-        # urdf_publisher,
-        # lgsvl_interface,
+        ndt_localizer_param,
+        mpc_param,
+        pc_filter_transform_param,
+        vehicle_characteristics_param,
+        urdf_publisher,
+        lgsvl_interface,
         map_publisher,
-        # ndt_localizer,
-        # mpc,
-        # filter_transform_vlp16_front,
+        ndt_localizer,
+        mpc,
+        filter_transform_vlp16_front,
         core_launch,
-        # adapter_launch,
+        adapter_launch,
     ])
