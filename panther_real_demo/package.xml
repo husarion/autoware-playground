@@ -25,6 +25,7 @@
   <exec_depend>lgsvl_interface</exec_depend>
   <exec_depend>mpc_controller_nodes</exec_depend>
   <exec_depend>ndt_nodes</exec_depend>
+  <exec_depend>ndt_mapping_nodes</exec_depend>
   <exec_depend>object_collision_estimator_nodes</exec_depend>
   <exec_depend>off_map_obstacles_filter_nodes</exec_depend>
   <exec_depend>parking_planner_nodes</exec_depend>
