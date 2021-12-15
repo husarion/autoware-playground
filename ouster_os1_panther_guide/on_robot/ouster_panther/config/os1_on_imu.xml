@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<robot name="panther">
+
+  <!-- base_link relates to its projection on the ground by this offset:
+    <origin xyz="0 0 0.31" rpy="0 0 0"/>
+  -->
+
+  <link name="os_sensor">
+    <visual>
+      <geometry>
+        <mesh filename="file:///home/nicolas/autoware_project/ade_autoware_home/AutowareAuto/src/autoware-playground/panther_autoware_demo/meshes/Panther_v1.0.stl" scale="0.001 0.001 0.001"/>
+        <!-- <mesh filename="package://ouster_ros/meshes/Panther_v1.0.stl" scale="0.001 0.001 0.001"/> -->
+      </geometry>
+      <material name="black"/>
+      <origin xyz="0.23 0 -0.19" rpy="1.570796 0 1.570796"/>
+    </visual>
+  </link>
+  
+</robot>
