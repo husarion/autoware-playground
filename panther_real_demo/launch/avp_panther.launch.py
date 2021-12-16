@@ -100,6 +100,7 @@ def generate_launch_description():
         parameters=[
           LaunchConfiguration('lgsvl_interface_param_file'),
           {"lgsvl.publish_tf": True}
+        #   {"use_nav_odometry_topic": False}
         ],
         remappings=[
             ("vehicle_control_cmd", "/lgsvl/vehicle_control_cmd"),
