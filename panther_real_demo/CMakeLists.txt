@@ -29,4 +29,5 @@ ament_auto_package(
     meshes
     urdf
     rviz
+    data
 )

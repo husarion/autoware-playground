@@ -44,6 +44,9 @@ def generate_launch_description():
     lanelet2_map_provider_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/lanelet2_map_provider.param.yaml')
 
+    map_osm_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'data/pod_biurem_lanelet_map_FINAL.osm')
+
     euclidean_cluster_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/euclidean_cluster.param.yaml')
     ray_ground_classifier_param_file = os.path.join(
@@ -138,16 +141,16 @@ def generate_launch_description():
         namespace='perception',
         condition=IfCondition(LaunchConfiguration('with_obstacles')),
         parameters=[LaunchConfiguration('ray_ground_classifier_param_file')],
-        remappings=[("points_in", "/lidar_front/points_filtered")]
+        remappings=[("points_in", "/os_cloud_node/points_filtered")]
     )
     scan_downsampler = Node(
         package='voxel_grid_nodes',
         executable='voxel_grid_node_exe',
-        namespace='lidars',
+        namespace='os_cloud_node',
         name='voxel_grid_cloud_node',
         parameters=[LaunchConfiguration('scan_downsampler_param_file')],
         remappings=[
-            ("points_in", "/lidar_front/points_filtered"),
+            ("points_in", "/os_cloud_node/points_filtered"),
             ("points_downsampled", "points_fused_downsampled")
         ]
     )
@@ -156,7 +159,9 @@ def generate_launch_description():
         executable='lanelet2_map_provider_exe',
         namespace='had_maps',
         name='lanelet2_map_provider_node',
-        parameters=[LaunchConfiguration('lanelet2_map_provider_param_file')]
+        parameters=[
+            LaunchConfiguration('lanelet2_map_provider_param_file'),
+            {"map_osm_file": map_osm_file}]
     )
     lanelet2_map_visualizer = Node(
         package='lanelet2_map_provider',

@@ -40,11 +40,16 @@ def generate_launch_description():
     mpc_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/mpc_sim.param.yaml')
     pc_filter_transform_param_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'custom_params/pc_filter_transform.param.yaml')
+        panther_real_demo_pkg_prefix, 'custom_params/os64_filter_transform.param.yaml')
     vehicle_characteristics_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
     map_publisher_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/map_publisher.param.yaml')
+
+    map_pcd_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'data/podb_xyz_transformed.pcd')
+    map_yaml_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'data/autonomoustuff_parking_lot_lgsvl.yaml')
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
@@ -107,23 +112,26 @@ def generate_launch_description():
             ("vehicle_state_cmd", "/lgsvl/vehicle_state_cmd"),
             ("state_report", "/lgsvl/state_report"),
             ("state_report_out", "/vehicle/state_report"),
-            ("gnss_odom", "/lgsvl/gnss_odom"),
+            ("gnss_odom", "/odometry/filtered"),
             ("vehicle_odom", "/lgsvl/vehicle_odom")
         ]
     )
-    filter_transform_vlp16_front = Node(
+    filter_transform_os64 = Node(
         package='point_cloud_filter_transform_nodes',
         executable='point_cloud_filter_transform_node_exe',
-        name='filter_transform_vlp16_front',
-        namespace='lidar_front',
+        name='filter_transform_os64',
+        namespace='os_cloud_node',
         parameters=[LaunchConfiguration('pc_filter_transform_param_file')],
-        remappings=[("points_in", "points_xyzi")]
+        remappings=[("points_in", "points")]
     )
     map_publisher = Node(
         package='ndt_nodes',
         executable='ndt_map_publisher_exe',
         namespace='localization',
-        parameters=[LaunchConfiguration('map_publisher_param_file')]
+        parameters=[
+            LaunchConfiguration('map_publisher_param_file'),
+            {"map_pcd_file": map_pcd_file},
+            {"map_yaml_file": map_yaml_file}]
     )
     urdf_publisher = Node(
         package='robot_state_publisher',
@@ -138,8 +146,8 @@ def generate_launch_description():
         name='p2d_ndt_localizer_node',
         parameters=[LaunchConfiguration('ndt_localizer_param_file')],
         remappings=[
-            ("points_in", "/lidars/points_fused_downsampled"),
-            ("observation_republish", "/lidars/points_fused_viz"),
+            ("points_in", "/os_cloud_node/points_fused_downsampled"),
+            ("observation_republish", "/os_cloud_node/points_fused_viz"),
         ]
     )
     mpc = Node(
@@ -179,7 +187,7 @@ def generate_launch_description():
         map_publisher,
         ndt_localizer,
         mpc,
-        filter_transform_vlp16_front,
+        filter_transform_os64,
         core_launch,
         adapter_launch,
     ])
