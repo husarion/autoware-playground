@@ -1,0 +1,96 @@
+frequency: 30
+
+silent_tf_failure: false
+
+sensor_timeout: 0.1
+
+two_d_mode: true
+
+transform_time_offset: 0.0
+
+transform_timeout: 0.0
+
+print_diagnostics: true
+
+debug: false
+
+debug_out_file: /path/to/debug/file.txt
+
+publish_tf: false
+
+publish_acceleration: false
+
+# map_frame: map
+odom_frame: odom
+base_link_frame: base_link 
+world_frame: odom
+
+odom0: /odom/wheel
+odom0_config: [true, true, false,
+               false, false, true,
+               false, false, false,
+               false, false, false,
+               false, false, false]
+
+odom0_queue_size: 1
+odom0_nodelay: false
+odom0_differential: true
+odom0_relative: false
+
+# odom0_odom_rejection_threshold: 5
+# odom0_twist_rejection_threshold: 1
+
+imu0: /os_cloud_node/imu/data
+imu0_config: [false, false, false,
+              false, false, false,
+              false, false, false,
+              false, false, true,
+              true, false, false]
+imu0_nodelay: true
+imu0_differential: false
+imu0_relative: true
+imu0_queue_size: 20
+imu0_remove_gravitational_acceleration: true
+
+# imu0_pose_rejection_threshold: 2          
+# imu0_twist_rejection_threshold: 2              
+# imu0_linear_acceleration_rejection_threshold: 2
+
+#use_control: false
+#stamped_control: false
+#control_timeout: 0.2
+#control_config: [false, false, false, false, false, false]
+
+#                            x   y     z     roll  pitch yaw   v_x    v_y    v_z   ang_vx  y   z     acc x  y   z
+process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0.05, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0.06, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0.03, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0.03, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0.06, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0.025, 0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0.025, 0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0.04, 0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0.01, 0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0.01, 0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0.01,  0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0.08, 0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0.01, 0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0.015]
+
+
+initial_estimate_covariance: [1e-9, 0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    1e-9, 0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    1e-9, 0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    1e-9, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    1e-9, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    1e-9, 0,    0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    1e-9, 0,    0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    1e-9, 0,    0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    1e-9, 0,     0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    1e-9,  0,     0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     1e-9,  0,     0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     1e-9,  0,    0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     1e-2, 0,    0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    1e-2, 0,
+                              0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    1e-2]
