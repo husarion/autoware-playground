@@ -25,24 +25,25 @@
 #include <chrono>
 #include <string>
 
-#include "autoware_auto_msgs/msg/headlights_report.hpp"
-#include "autoware_auto_msgs/msg/horn_report.hpp"
-#include "autoware_auto_msgs/msg/wipers_report.hpp"
-#include "autoware_auto_msgs/msg/hazard_lights_report.hpp"
+#include "autoware_auto_vehicle_msgs/msg/hand_brake_report.hpp"
+#include "autoware_auto_vehicle_msgs/msg/headlights_report.hpp"
+#include "autoware_auto_vehicle_msgs/msg/horn_report.hpp"
+#include "autoware_auto_vehicle_msgs/msg/wipers_report.hpp"
+#include "autoware_auto_vehicle_msgs/msg/hazard_lights_report.hpp"
 
 namespace panther_interface
 {
 
-/// Node wrapping LgsvlInterface.
+/// Node wrapping PantherInterface.
 /// For a full list of behaviors, see \ref lgsvl
-class panther_interface_PUBLIC LgsvlInterfaceNode
+class panther_interface_PUBLIC PantherInterfaceNode
   : public ::autoware::drivers::vehicle_interface::VehicleInterfaceNode
 {
 public:
   /// ROS 2 parameter constructor
   /// \param[in] options An rclcpp::NodeOptions object
-  explicit LgsvlInterfaceNode(const rclcpp::NodeOptions & options);
-};  // class LgsvlInterfaceNode
+  explicit PantherInterfaceNode(const rclcpp::NodeOptions & options);
+};  // class PantherInterfaceNode
 }  // namespace panther_interface
 
 #endif  // panther_interface__panther_interface_NODE_HPP_

@@ -2,8 +2,8 @@
 /**:
   ros__parameters:
     cycle_time_ms: 10
-    # Only one of the three control command topics need be specified
-    # "raw", "basic" or "high_level"
+    # Only one of the four control command topics need be specified
+    # "raw", "basic", "ackermann", or "high_level"
     control_command: "raw"
     lgsvl:
       use_nav_odometry_topic: True
@@ -32,4 +32,4 @@
       timeout_acceleration_mps2: 3.0
       state_transition_timeout_ms: 3000
       gear_shift_accel_deadzone_mps2: 0.5
-    features: ["headlights", "horn", "wipers"]
+    features: ["headlights", "horn", "wipers", "gear"]

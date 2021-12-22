@@ -1,4 +1,4 @@
-// Copyright 2020 the Autoware Foundation
+// Copyright 2020-2021 the Autoware Foundation
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,15 +20,20 @@
 
 #include <panther_interface/visibility_control.hpp>
 
-#include <autoware_auto_msgs/msg/headlights_command.hpp>
-#include <autoware_auto_msgs/msg/horn_command.hpp>
-#include <autoware_auto_msgs/msg/wipers_command.hpp>
-#include <autoware_auto_msgs/msg/hazard_lights_command.hpp>
-#include <autoware_auto_msgs/msg/raw_control_command.hpp>
-#include <autoware_auto_msgs/msg/vehicle_kinematic_state.hpp>
-#include <autoware_auto_msgs/msg/vehicle_state_command.hpp>
-#include <autoware_auto_msgs/msg/vehicle_state_report.hpp>
-#include <autoware_auto_msgs/srv/autonomy_mode_change.hpp>
+#include <autoware_auto_control_msgs/msg/ackermann_control_command.hpp>
+
+#include <autoware_auto_vehicle_msgs/msg/gear_report.hpp>
+#include <autoware_auto_vehicle_msgs/msg/hand_brake_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/hand_brake_report.hpp>
+#include <autoware_auto_vehicle_msgs/msg/headlights_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/horn_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/wipers_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/hazard_lights_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/raw_control_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/vehicle_kinematic_state.hpp>
+#include <autoware_auto_vehicle_msgs/msg/vehicle_state_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/vehicle_state_report.hpp>
+#include <autoware_auto_vehicle_msgs/srv/autonomy_mode_change.hpp>
 
 #include <lgsvl_msgs/msg/vehicle_odometry.hpp>
 #include <lgsvl_msgs/msg/can_bus_data.hpp>
@@ -79,20 +84,21 @@ constexpr bool PUBLISH = true;
 constexpr bool NO_PUBLISH = false;
 
 // in lgsvl 0 is drive and 1 is reverse https://github.com/lgsvl/simulator/blob/cb937deb8e633573f6c0cc76c9f451398b8b9eff/Assets/Scripts/Sensors/VehicleStateSensor.cs#L70
-using VSC = autoware_auto_msgs::msg::VehicleStateCommand;
+using VSC = autoware_auto_vehicle_msgs::msg::VehicleStateCommand;
 using VSD = lgsvl_msgs::msg::VehicleStateData;
 using WIPER_TYPE = decltype(VSC::wiper);
-using GEAR_TYPE = decltype(VSC::gear);
+using GEAR_TYPE =
+  std::remove_const<decltype(autoware_auto_vehicle_msgs::msg::GearReport::DRIVE_1)>::type;
 using MODE_TYPE = decltype(VSC::mode);
 
 /// Platform interface implementation for LGSVL. Bridges data to and from the simulator
 /// where custom logic is required to get simulator data to adhere to ROS conventions.
 /// For a full list of behaviors, see \ref lgsvl
-class panther_interface_PUBLIC LgsvlInterface
+class panther_interface_PUBLIC PantherInterface
   : public ::autoware::drivers::vehicle_interface::PlatformInterface
 {
 public:
-  LgsvlInterface(
+  PantherInterface(
     rclcpp::Node & node,
     const std::string & sim_cmd_topic,
     const std::string & sim_state_cmd_topic,
@@ -107,27 +113,34 @@ public:
     bool publish_tf = NO_PUBLISH,
     bool publish_pose = PUBLISH);
 
-  ~LgsvlInterface() noexcept override = default;
+  ~PantherInterface() noexcept override = default;
   /// Receives data from ROS 2 subscriber, and updates output messages.
   /// Not yet implemented
   bool update(std::chrono::nanoseconds timeout) override;
   /// Queues up data to be sent along with the next control command.
   /// Only gear shifting between drive and reverse is supported at this time.
-  bool send_state_command(const autoware_auto_msgs::msg::VehicleStateCommand & msg) override;
+  bool send_state_command(
+    const autoware_auto_vehicle_msgs::msg::VehicleStateCommand & msg) override;
   /// Send control command data with whatever state data came along last
-  bool send_control_command(const autoware_auto_msgs::msg::VehicleControlCommand & msg) override;
+  bool send_control_command(const autoware_auto_vehicle_msgs::msg::VehicleControlCommand & msg)
+  override;
+  /// Send control command data with whatever state data came along last
+  bool send_control_command(const autoware_auto_control_msgs::msg::AckermannControlCommand & msg)
+  override;
   /// Send control data with whatever state data came along last; applies scaling here too.
   /// If both brake and throttle is nonzero, decide based on config
-  bool send_control_command(const autoware_auto_msgs::msg::RawControlCommand & msg) override;
+  bool send_control_command(
+    const autoware_auto_vehicle_msgs::msg::RawControlCommand & msg) override;
   /// Respond to request for changing autonomy mode. For LGSVL, this means nothing.
   bool handle_mode_change_request(
-    autoware_auto_msgs::srv::AutonomyModeChange_Request::SharedPtr request) override;
+    autoware_auto_vehicle_msgs::srv::AutonomyModeChange_Request::SharedPtr request) override;
   /// Send headlights command data.
-  void send_headlights_command(const autoware_auto_msgs::msg::HeadlightsCommand & msg) override;
+  void send_headlights_command(const autoware_auto_vehicle_msgs::msg::HeadlightsCommand & msg)
+  override;
   /// Send horn command data.
-  void send_horn_command(const autoware_auto_msgs::msg::HornCommand & msg) override;
+  void send_horn_command(const autoware_auto_vehicle_msgs::msg::HornCommand & msg) override;
   /// Send wipers command data.
-  void send_wipers_command(const autoware_auto_msgs::msg::WipersCommand & msg) override;
+  void send_wipers_command(const autoware_auto_vehicle_msgs::msg::WipersCommand & msg) override;
 
 private:
   // Mappings from Autoware to LGSVL values
@@ -138,12 +151,12 @@ private:
   // Convert odometry into vehicle kinematic state and pose
   void on_odometry(const nav_msgs::msg::Odometry & msg);
 
-  // store state_report with gear value correction
-  void on_state_report(const autoware_auto_msgs::msg::VehicleStateReport & msg);
+  // store gear_report with gear value correction
+  void on_gear_report(const autoware_auto_vehicle_msgs::msg::GearReport & msg);
 
   rclcpp::Publisher<lgsvl_msgs::msg::VehicleControlData>::SharedPtr m_cmd_pub{};
   rclcpp::Publisher<lgsvl_msgs::msg::VehicleStateData>::SharedPtr m_state_pub{};
-  rclcpp::Publisher<autoware_auto_msgs::msg::VehicleKinematicState>::SharedPtr
+  rclcpp::Publisher<autoware_auto_vehicle_msgs::msg::VehicleKinematicState>::SharedPtr
     m_kinematic_state_pub{};
   rclcpp::Publisher<tf2_msgs::msg::TFMessage>::SharedPtr m_tf_pub{};
   rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr m_pose_pub{};
@@ -162,7 +175,7 @@ private:
   std::shared_ptr<tf2_ros::TransformListener> m_tf_listener;
 
   bool m_nav_base_tf_set{false};
-  autoware_auto_msgs::msg::VehicleKinematicState m_nav_base_in_child_frame{};
+  autoware_auto_vehicle_msgs::msg::VehicleKinematicState m_nav_base_in_child_frame{};
 
   bool m_odom_set{false};  // TODO(c.ho) this should be optional<Vector3>
   geometry_msgs::msg::Vector3 m_odom_zero{};
@@ -170,7 +183,7 @@ private:
   lgsvl_msgs::msg::VehicleStateData m_lgsvl_state{};
 
   rclcpp::Logger m_logger;
-};  // class LgsvlInterface
+};  // class PantherInterface
 
 }  // namespace panther_interface
 

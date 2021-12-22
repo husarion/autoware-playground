@@ -13,12 +13,13 @@
 # limitations under the License.
 #
 # Co-developed by Tier IV, Inc. and Apex.AI, Inc.
-from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
-from launch_ros.actions import Node
-from ament_index_python import get_package_share_directory
 import os
+
+from ament_index_python import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
 
 
 def get_share_file(package_name, file_name):
@@ -39,7 +40,7 @@ def generate_launch_description():
     # only one of them can be active at a time with a value
     control_command_param = DeclareLaunchArgument(
         'control_command',
-        default_value="raw",  # use "raw", "basic" or "high_level"
+        default_value='raw',  # use 'raw', 'basic' or 'high_level'
         description='command control mode')
 
     # Default panther_interface params
@@ -62,15 +63,15 @@ def generate_launch_description():
         parameters=[
             LaunchConfiguration('panther_interface_param'),
             # overwrite parameters from yaml here
-            {"control_command": LaunchConfiguration('control_command')}
+            {'control_command': LaunchConfiguration('control_command')}
         ],
         remappings=[
-            ("vehicle_control_cmd", "/lgsvl/vehicle_control_cmd"),
-            ("vehicle_state_cmd", "/lgsvl/vehicle_state_cmd"),
-            ("state_report", "/lgsvl/state_report"),
-            ("state_report_out", "state_report"),
-            ("gnss_odom", "/lgsvl/gnss_odom"),
-            ("vehicle_odom", "/lgsvl/vehicle_odom")
+            ('vehicle_control_cmd', '/lgsvl/vehicle_control_cmd'),
+            ('vehicle_state_cmd', '/lgsvl/vehicle_state_cmd'),
+            ('state_report', '/lgsvl/state_report'),
+            ('state_report_out', 'state_report'),
+            ('gnss_odom', '/lgsvl/gnss_odom'),
+            ('vehicle_odom', '/lgsvl/vehicle_odom')
         ]
     )
 

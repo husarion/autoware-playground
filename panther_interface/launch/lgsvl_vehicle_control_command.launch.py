@@ -14,13 +14,14 @@
 #
 # Co-developed by Tier IV, Inc. and Apex.AI, Inc.
 
+import os
+
+from ament_index_python import get_package_share_directory
 from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from ament_index_python import get_package_share_directory
-import os
+from launch.substitutions import LaunchConfiguration
 
 
 def get_share_file(package_name, file_name):
@@ -42,7 +43,7 @@ def generate_launch_description():
     # only one of them can be active at a time with a value
     control_command_param = DeclareLaunchArgument(
         'control_command',
-        default_value="raw",  # use "raw", "basic" or "high_level"
+        default_value='raw',  # use 'raw', 'basic' or 'high_level'
         description='command control mode topic name')
 
     # Default joystick translator params
@@ -69,8 +70,8 @@ def generate_launch_description():
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(joystick_launch_file_path),
         launch_arguments={
-            "joy_translator_param": LaunchConfiguration("joy_translator_param"),
-            "control_command": LaunchConfiguration('control_command')
+            'joy_translator_param': LaunchConfiguration('joy_translator_param'),
+            'control_command': LaunchConfiguration('control_command')
         }.items()
     )
 
@@ -80,8 +81,8 @@ def generate_launch_description():
     lgsvl = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(lgsvl_launch_file_path),
         launch_arguments={
-            "panther_interface_param": LaunchConfiguration("panther_interface_param"),
-            "control_command": LaunchConfiguration('control_command')
+            'panther_interface_param': LaunchConfiguration('panther_interface_param'),
+            'control_command': LaunchConfiguration('control_command')
         }.items()
     )
 

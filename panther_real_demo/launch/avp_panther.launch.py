@@ -52,7 +52,7 @@ def generate_launch_description():
         panther_real_demo_pkg_prefix, 'data/autonomoustuff_parking_lot_lgsvl.yaml')
 
     lgsvl_param_file = os.path.join(
-        autoware_launch_pkg_prefix, 'param/panther_interface.param.yaml')
+        autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
     ndt_localizer_param_file = os.path.join(
         avp_demo_pkg_prefix, 'param/avp/ndt_localizer_sim.param.yaml')
 
@@ -63,8 +63,8 @@ def generate_launch_description():
 
     # Arguments
 
-    panther_interface_param = DeclareLaunchArgument(
-        'panther_interface_param_file',
+    lgsvl_interface_param = DeclareLaunchArgument(
+        'lgsvl_interface_param_file',
         default_value=lgsvl_param_file,
         description='Path to config file for LGSVL Interface'
     )
@@ -96,15 +96,14 @@ def generate_launch_description():
 
     # Nodes
 
-    panther_interface = Node(
-        package='panther_interface',
-        executable='panther_interface_exe',
+    lgsvl_interface = Node(
+        package='lgsvl_interface',
+        executable='lgsvl_interface_exe',
         namespace='vehicle',
-        name='panther_interface_node',
+        name='lgsvl_interface_node',
         output='screen',
         parameters=[
-          LaunchConfiguration('panther_interface_param_file'),
-          {"lgsvl.publish_tf": True}
+          LaunchConfiguration('lgsvl_interface_param_file')
         #   {"use_nav_odometry_topic": False}
         ],
         remappings=[
@@ -176,14 +175,14 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        panther_interface_param,
+        lgsvl_interface_param,
         map_publisher_param,
         ndt_localizer_param,
         mpc_param,
         pc_filter_transform_param,
         vehicle_characteristics_param,
         urdf_publisher,
-        panther_interface,
+        lgsvl_interface,
         map_publisher,
         ndt_localizer,
         mpc,

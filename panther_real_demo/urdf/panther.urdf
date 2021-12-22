@@ -63,7 +63,7 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
-  <link name="lidar_front">
+  <link name="os_sensor">
     <visual>
       <geometry>
         <cylinder length="0.0869" radius="0.05165"/>
@@ -84,36 +84,9 @@
     </inertial>
   </link>
 
-  <joint name="lidar_front_joint" type="fixed">
+  <joint name="os_sensor_joint" type="fixed">
     <parent link="base_link"/>
-    <child link="lidar_front"/>
+    <child link="os_sensor"/>
     <origin xyz="0.42 0.0 0.19" rpy="0 0 0"/>
-  </joint>
-
-  <link name="lidar_rear">
-    <visual>
-      <geometry>
-        <cylinder length="0.0869" radius="0.05165"/>
-      </geometry>
-      <material name="blue"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.0869" radius="0.05165"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <!-- TODO: Get or calculate inertia values -->
-      <mass value="0.1"/>
-      <inertia ixx="1.02083e-5" ixy="0" ixz="0"
-        iyy="1.02083e-5" iyz="0"
-        izz="2e-5"/>
-    </inertial>
-  </link>
-
-  <joint name="lidar_rear_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="lidar_rear"/>
-    <origin xyz="0.047 0.0 0.19" rpy="0 0 0"/>
   </joint>
 </robot>

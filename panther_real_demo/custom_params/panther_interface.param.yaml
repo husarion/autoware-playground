@@ -1,6 +1,9 @@
+# based on vehicle_interface.param.template.yaml
 /**:
   ros__parameters:
     cycle_time_ms: 10
+    # Only one of the four control command topics need be specified
+    # "raw", "basic", "ackermann", or "high_level"
     control_command: "raw"
     lgsvl:
       use_nav_odometry_topic: True
@@ -14,6 +17,7 @@
         domain: [-0.331, 0.331]
         range: [-100.0, 100.0]
       publish_tf: False
+      odom_child_frame: "base_link"
     state_machine:
       gear_shift_velocity_threshold_mps: 0.5
       acceleration_limits:

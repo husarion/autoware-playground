@@ -31,7 +31,7 @@ using autoware::drivers::vehicle_interface::ViFeature;
 namespace panther_interface
 {
 
-LgsvlInterfaceNode::LgsvlInterfaceNode(
+PantherInterfaceNode::PantherInterfaceNode(
   const rclcpp::NodeOptions & options)
 : VehicleInterfaceNode{
     "panther_interface",
@@ -39,6 +39,7 @@ LgsvlInterfaceNode::LgsvlInterfaceNode(
       ViFeature::HEADLIGHTS,
       ViFeature::HORN,
       ViFeature::WIPERS,
+      ViFeature::GEAR,
     },
     options
 }
@@ -70,7 +71,7 @@ LgsvlInterfaceNode::LgsvlInterfaceNode(
 
   // Set up interface
   set_interface(
-    std::make_unique<LgsvlInterface>(
+    std::make_unique<PantherInterface>(
       *this,
       sim_ctrl_cmd_topic,
       sim_state_cmd_topic,
@@ -91,4 +92,4 @@ LgsvlInterfaceNode::LgsvlInterfaceNode(
 }  // namespace panther_interface
 
 #include "rclcpp_components/register_node_macro.hpp"  // NOLINT
-RCLCPP_COMPONENTS_REGISTER_NODE(panther_interface::LgsvlInterfaceNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(panther_interface::PantherInterfaceNode)

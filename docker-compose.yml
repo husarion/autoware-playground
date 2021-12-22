@@ -1,0 +1,13 @@
+version: "2.3"
+
+services:
+  bridge:
+    image: ros:foxy-ros1-bridge
+    restart: on-failure
+    network_mode: host
+    ipc: host
+    environment:
+      - "ROS_DOMAIN_ID=14"
+      - "ROS_IP=10.15.20.3"
+      - "ROS_MASTER_URI=http://10.15.20.2:11311"
+    command: ros2 run ros1_bridge dynamic_bridge
