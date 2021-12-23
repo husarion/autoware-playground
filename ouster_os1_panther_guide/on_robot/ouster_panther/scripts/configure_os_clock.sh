@@ -1,0 +1,1 @@
+sudo ptp4l -i eno1 -m -f os1.conf
