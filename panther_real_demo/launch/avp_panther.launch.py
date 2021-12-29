@@ -103,7 +103,8 @@ def generate_launch_description():
         name='lgsvl_interface_node',
         output='screen',
         parameters=[
-          LaunchConfiguration('lgsvl_interface_param_file')
+            LaunchConfiguration('lgsvl_interface_param_file'),
+            {"lgsvl.publish_tf": True}
         #   {"use_nav_odometry_topic": False}
         ],
         remappings=[

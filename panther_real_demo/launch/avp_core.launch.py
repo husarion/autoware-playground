@@ -56,14 +56,19 @@ def generate_launch_description():
 
     lane_planner_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lane_planner.param.yaml')
-    parking_planner_param_file = os.path.join(
-        autoware_launch_pkg_prefix, 'param/parking_planner.param.yaml')
+    costmap_generator_param_file = os.path.join(
+        autoware_launch_pkg_prefix, 'param/costmap_generator.param.yaml')
+    freespace_planner_param_file = os.path.join(
+        autoware_launch_pkg_prefix, 'param/freespace_planner.param.yaml')
     object_collision_estimator_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/object_collision_estimator.param.yaml')
     behavior_planner_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/behavior_planner.param.yaml')
     off_map_obstacles_filter_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/off_map_obstacles_filter.param.yaml')
+
+    vehicle_constants_manager_param_file = os.path.join(
+        autoware_launch_pkg_prefix, 'param/lexus_rx_hybrid_2016.param.yaml')
 
     # Arguments
 
@@ -97,10 +102,15 @@ def generate_launch_description():
         default_value=lane_planner_param_file,
         description='Path to parameter file for lane planner'
     )
-    parking_planner_param = DeclareLaunchArgument(
-        'parking_planner_param_file',
-        default_value=parking_planner_param_file,
-        description='Path to parameter file for parking planner'
+    costmap_generator_param = DeclareLaunchArgument(
+        'costmap_generator_param_file',
+        default_value=costmap_generator_param_file,
+        description='Path to parameter file for costmap generator'
+    )
+    freespace_planner_param = DeclareLaunchArgument(
+        'freespace_planner_param_file',
+        default_value=freespace_planner_param_file,
+        description='Path to parameter file for freespace_planner'
     )
     object_collision_estimator_param = DeclareLaunchArgument(
         'object_collision_estimator_param_file',
@@ -121,6 +131,11 @@ def generate_launch_description():
         'vehicle_characteristics_param_file',
         default_value=vehicle_characteristics_param_file,
         description='Path to config file for vehicle characteristics'
+    )  
+    vehicle_constants_manager_param = DeclareLaunchArgument(
+        'vehicle_constants_manager_param_file',
+        default_value=vehicle_constants_manager_param_file,
+        description='Path to parameter file for vehicle_constants_manager'
     )
 
     # Nodes
@@ -188,16 +203,29 @@ def generate_launch_description():
         ],
         remappings=[('HAD_Map_Service', '/had_maps/HAD_Map_Service')]
     )
-    parking_planner = Node(
-        package='parking_planner_nodes',
-        name='parking_planner_node',
+    costmap_generator = Node(
+        package='costmap_generator_nodes',
+        executable='costmap_generator_node_exe',
+        name='costmap_generator_node',
         namespace='planning',
-        executable='parking_planner_node_exe',
+        output='screen',
         parameters=[
-            LaunchConfiguration('parking_planner_param_file'),
-            LaunchConfiguration('vehicle_characteristics_param_file'),
+            LaunchConfiguration('costmap_generator_param_file'),
         ],
-        remappings=[('HAD_Map_Service', '/had_maps/HAD_Map_Service')]
+        remappings=[
+            ('~/client/HAD_Map_Service', '/had_maps/HAD_Map_Service')
+        ]
+    )
+    freespace_planner = Node(
+        package='freespace_planner',
+        executable='freespace_planner_node_exe',
+        name='freespace_planner',
+        namespace='planning',
+        output='screen',
+        parameters=[
+            LaunchConfiguration('freespace_planner_param_file'),
+            LaunchConfiguration('vehicle_constants_manager_param_file')
+        ]
     )
     object_collision_estimator = Node(
         package='object_collision_estimator_nodes',
@@ -253,11 +281,13 @@ def generate_launch_description():
         with_obstacles_param,
         lanelet2_map_provider_param,
         lane_planner_param,
-        parking_planner_param,
+        costmap_generator_param,
+        freespace_planner_param,
         object_collision_estimator_param,
         behavior_planner_param,
         off_map_obstacles_filter_param,
         vehicle_characteristics_param,
+        vehicle_constants_manager_param,
         euclidean_clustering,
         ray_ground_classifier,
         scan_downsampler,
@@ -265,7 +295,8 @@ def generate_launch_description():
         lanelet2_map_visualizer,
         global_planner,
         lane_planner,
-        parking_planner,
+        costmap_generator,
+        freespace_planner,
         object_collision_estimator,
         behavior_planner,
         off_map_obstacles_filter,
