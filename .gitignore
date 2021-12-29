@@ -1,3 +1,15 @@
 .vscode
-ERRORLOGS
 TODO*
+.aderc
+.bashrc
+.profile
+.bash_logout
+.bash_history
+build/
+install/
+log/
+.Xauthority
+.ssh
+external/
+devel/
+.catkin_workspace

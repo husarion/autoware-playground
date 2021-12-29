@@ -264,6 +264,6 @@
     "prod_sn": "122036000201",
     "proto_rev": "v1.1.1",
     "status": "RUNNING",
-    "udp_port_imu": 33931,
-    "udp_port_lidar": 60386
+    "udp_port_imu": 60689,
+    "udp_port_lidar": 52299
 }
