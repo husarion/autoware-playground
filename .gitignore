@@ -1,15 +1,22 @@
 .vscode
 TODO*
-.aderc
+
+## ADE
 .bashrc
 .profile
 .bash_logout
 .bash_history
-build/
-install/
-log/
 .Xauthority
 .ssh
 external/
+.dbus
+.rviz2
+
+# ROS2
+build/
+install/
+log/
+
+# ROS1
 devel/
 .catkin_workspace

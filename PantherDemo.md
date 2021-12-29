@@ -31,7 +31,7 @@ git clone https://github.com/husarion/autoware-playground/
 
 3. Build ADE software
 ```
-cd adehome/AutowareAuto/
+cd adehome/AutowareDemo/
 sudo ade update-cli
 ade start --update --enter
 cd AutowareDemo
