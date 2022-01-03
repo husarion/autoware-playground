@@ -121,6 +121,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+install(PROGRAMS scripts/configure_os_clock.sh 
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/ouster_panther.cpp

@@ -96,6 +96,12 @@ def generate_launch_description():
 
     # Nodes
 
+    panther_adapter = Node(
+        package='panther_adapter',
+        executable='panther_adapter',
+        name='panther_adapter',
+        output='screen'
+    )
     lgsvl_interface = Node(
         package='lgsvl_interface',
         executable='lgsvl_interface_exe',
@@ -190,4 +196,5 @@ def generate_launch_description():
         filter_transform_os64,
         core_launch,
         adapter_launch,
+        panther_adapter,
     ])
