@@ -46,12 +46,12 @@ def generate_launch_description():
         panther_real_demo_pkg_prefix, 'data/pod_biurem_lanelet_map_FINAL.osm')
     euclidean_cluster_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/euclidean_cluster.param.yaml')
-
     ray_ground_classifier_param_file = os.path.join(
-        autoware_launch_pkg_prefix, 'param/ray_ground_classifier.param.yaml')
+        panther_real_demo_pkg_prefix, 'custom_params/ray_ground_classifier.param.yaml')
+
+
     scan_downsampler_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/scan_downsampler.param.yaml')
-
     lane_planner_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lane_planner.param.yaml')
     costmap_generator_param_file = os.path.join(
