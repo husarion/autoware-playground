@@ -38,7 +38,7 @@ def generate_launch_description():
 
     ## CUSTOM PARAMS
     mpc_param_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'custom_params/mpc_sim.param.yaml')
+        panther_real_demo_pkg_prefix, 'custom_params/mpc.param.yaml')
     pc_filter_transform_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/os64_filter_transform.param.yaml')
     vehicle_characteristics_param_file = os.path.join(
