@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!-- TODO: Add GPS sensor -->
-<robot name="lexus_rx_450h">
+<robot name="panther">
   <material name="black">
     <color rgba="0.2 0.2 0.2 1"/>
   </material>
