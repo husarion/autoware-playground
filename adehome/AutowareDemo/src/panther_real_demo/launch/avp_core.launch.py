@@ -48,6 +48,10 @@ def generate_launch_description():
         panther_real_demo_pkg_prefix, 'custom_params/euclidean_cluster.param.yaml')
     ray_ground_classifier_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/ray_ground_classifier.param.yaml')
+    vehicle_constants_manager_param_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'custom_params/panther_constants.param.yaml')
+    freespace_planner_param_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'custom_params/freespace_planner.param.yaml')
 
 
     scan_downsampler_param_file = os.path.join(
@@ -56,8 +60,6 @@ def generate_launch_description():
         autoware_launch_pkg_prefix, 'param/lane_planner.param.yaml')
     costmap_generator_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/costmap_generator.param.yaml')
-    freespace_planner_param_file = os.path.join(
-        autoware_launch_pkg_prefix, 'param/freespace_planner.param.yaml')
     object_collision_estimator_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/object_collision_estimator.param.yaml')
     behavior_planner_param_file = os.path.join(
@@ -65,8 +67,6 @@ def generate_launch_description():
     off_map_obstacles_filter_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/off_map_obstacles_filter.param.yaml')
 
-    vehicle_constants_manager_param_file = os.path.join(
-        autoware_launch_pkg_prefix, 'param/lexus_rx_hybrid_2016.param.yaml')
 
     # Arguments
 

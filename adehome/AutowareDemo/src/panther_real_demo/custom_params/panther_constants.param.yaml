@@ -1,0 +1,20 @@
+/**:
+  ros__parameters:
+    vehicle:
+      wheel_radius: 0.37 # Measured from SVL
+      wheel_width: 0.1 # Measured from SVL *
+      wheel_base: 0.44 # Measured from SVL
+      wheel_tread: 0.7 # Measured from SVL
+      overhang_front: 0.0 # Measured from SVL
+      overhang_rear: 0.0 # Measured from SVL
+      overhang_left: 0.0 # Measured from SVL
+      overhang_right: 0.0 # Measured from SVL
+      vehicle_height: 0.22 # Measured from SVL
+      cg_to_rear: 0.23 # Assuming it is in middle of front and rear axle centers
+      tire_cornering_stiffness_front: 0.1 # Taken from AVP demo params, can't verify
+      tire_cornering_stiffness_rear: 0.1 # Taken from AVP demo params, can't verify
+      mass_vehicle: 60.0 # Measured from SVL
+      inertia_yaw_kg_m2: 12.0  # Taken from AVP demo params, can't verify
+      maximum_turning_angle_rad: 0.53
+
+

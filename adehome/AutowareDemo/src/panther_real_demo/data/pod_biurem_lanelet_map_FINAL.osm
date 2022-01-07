@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm generator="VMB">
-  <MetaInfo format_version="1" map_version="6"/>
-  <node id="6254" lat="37.380815902713145" lon="-121.90831504646134">
+  <MetaInfo format_version="1" map_version="7"/>
+  <node id="6254" lat="37.380823761670364" lon="-121.90831477100757">
     <tag k="mgrs_code" v="10SEG966376"/>
-    <tag k="local_x" v="96648.8261"/>
-    <tag k="local_y" v="37677.9112"/>
+    <tag k="local_x" v="96648.8404"/>
+    <tag k="local_y" v="37678.7834"/>
     <tag k="ele" v="-2.1595"/>
   </node>
-  <node id="6255" lat="37.38081057117112" lon="-121.90839880625272">
+  <node id="6255" lat="37.38082258805015" lon="-121.90839863205169">
     <tag k="mgrs_code" v="10SEG966376"/>
     <tag k="local_x" v="96641.4173"/>
-    <tag k="local_y" v="37677.2339"/>
+    <tag k="local_y" v="37678.5673"/>
     <tag k="ele" v="-2.1481"/>
   </node>
-  <node id="6257" lat="37.38078911461919" lon="-121.90827958219877">
+  <node id="6257" lat="37.38079047996875" lon="-121.90827956240399">
     <tag k="mgrs_code" v="10SEG966376"/>
     <tag k="local_x" v="96652.0003"/>
-    <tag k="local_y" v="37674.9755"/>
+    <tag k="local_y" v="37675.127"/>
     <tag k="ele" v="-2.0632"/>
   </node>
-  <node id="6258" lat="37.38078515467368" lon="-121.90839992694684">
+  <node id="6258" lat="37.3807865200233" lon="-121.9083999071543">
     <tag k="mgrs_code" v="10SEG966376"/>
     <tag k="local_x" v="96641.3507"/>
-    <tag k="local_y" v="37674.4129"/>
+    <tag k="local_y" v="37674.5644"/>
     <tag k="ele" v="-2.0504"/>
   </node>
-  <node id="6264" lat="37.38078505642669" lon="-121.90840021978232">
+  <node id="6264" lat="37.38078659120583" lon="-121.90840019753365">
     <tag k="mgrs_code" v="10SEG966376"/>
     <tag k="local_x" v="96641.3249"/>
-    <tag k="local_y" v="37674.4017"/>
+    <tag k="local_y" v="37674.572"/>
     <tag k="ele" v="-2.0504"/>
   </node>
-  <node id="6338" lat="37.380963448111196" lon="-121.90832923665221">
+  <node id="6338" lat="37.38097153327468" lon="-121.9083289579196">
     <tag k="mgrs_code" v="10SEG966376"/>
-    <tag k="local_x" v="96647.3804"/>
-    <tag k="local_y" v="37694.2662"/>
+    <tag k="local_x" v="96647.3947"/>
+    <tag k="local_y" v="37695.1635"/>
     <tag k="ele" v="-2.3136"/>
   </node>
   <node id="6341" lat="37.38096458385144" lon="-121.90829389947753">
