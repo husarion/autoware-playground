@@ -1,10 +1,5 @@
 /**:
   ros__parameters:
-    # map_pcd_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/ndt_map_pod_biurem_slabe1.pcd"
-    # map_pcd_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/pod_biurem_bin.pcd"
-    # map_pcd_file: "/opt/AutowareAuto/share/autoware_demos/data/autonomoustuff_parking_lot_lgsvl.pcd"
-    # map_pcd_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/podb_xyz_transformed.pcd"
-    # map_yaml_file: "/home/nicolas/AutowareAuto/src/autoware-playground/panther_real_demo/data/autonomoustuff_parking_lot_lgsvl.yaml"
     map_frame: "map"
     map_config:
       capacity: 1000000
