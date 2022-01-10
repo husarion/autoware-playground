@@ -1,5 +1,6 @@
 .vscode
 TODO*
+rosbags/
 
 ## ADE
 .bashrc
@@ -20,3 +21,4 @@ log/
 # ROS1
 devel/
 .catkin_workspace
+__pycache__/

@@ -37,14 +37,16 @@ def generate_launch_description():
     autoware_launch_pkg_prefix = get_package_share_directory('autoware_auto_launch')
 
     ## CUSTOM PARAMS
-    mpc_param_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'custom_params/mpc.param.yaml')
+    pure_pursuit_param_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'custom_params/pure_pursuit.param.yaml')
     pc_filter_transform_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/os64_filter_transform.param.yaml')
     vehicle_characteristics_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
     map_publisher_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/map_publisher.param.yaml')
+    panther_adapter_param_file = os.path.join(
+        panther_real_demo_pkg_prefix, 'custom_params/panther_adapter.param.yaml')
 
     map_pcd_file = os.path.join(
         panther_real_demo_pkg_prefix, 'data/podb_xyz_transformed.pcd')
@@ -63,6 +65,11 @@ def generate_launch_description():
 
     # Arguments
 
+    panther_adapter_param = DeclareLaunchArgument(
+        'panther_adapter_param_file',
+        default_value=panther_adapter_param_file,
+        description='Path to patnher adapter params'
+    )
     lgsvl_interface_param = DeclareLaunchArgument(
         'lgsvl_interface_param_file',
         default_value=lgsvl_param_file,
@@ -78,10 +85,10 @@ def generate_launch_description():
         default_value=ndt_localizer_param_file,
         description='Path to config file for ndt localizer'
     )
-    mpc_param = DeclareLaunchArgument(
-        'mpc_param_file',
-        default_value=mpc_param_file,
-        description='Path to config file for MPC'
+    pure_pursuit_controller_param = DeclareLaunchArgument(
+        "pure_pursuit_param_file",
+        default_value=pure_pursuit_param_file,
+        description="Path to config file to Pure Pursuit Controller",
     )
     pc_filter_transform_param = DeclareLaunchArgument(
         'pc_filter_transform_param_file',
@@ -100,7 +107,8 @@ def generate_launch_description():
         package='panther_adapter',
         executable='panther_adapter',
         name='panther_adapter',
-        output='screen'
+        output='screen',
+        parameters=[LaunchConfiguration('panther_adapter_param_file')]
     )
     lgsvl_interface = Node(
         package='lgsvl_interface',
@@ -156,14 +164,21 @@ def generate_launch_description():
             ("observation_republish", "/os_cloud_node/points_fused_viz"),
         ]
     )
-    mpc = Node(
-        package='mpc_controller_nodes',
-        executable='mpc_controller_node_exe',
-        name='mpc_controller_node',
-        namespace='control',
+    pure_pursuit_controller = Node(
+        package="pure_pursuit_nodes",
+        executable="pure_pursuit_node_exe",
+        namespace="control",
+        name="pure_pursuit_node",
+        output="screen",
         parameters=[
-            LaunchConfiguration('mpc_param_file'),
-            LaunchConfiguration('vehicle_characteristics_param_file'),
+            LaunchConfiguration("pure_pursuit_param_file"), 
+            LaunchConfiguration('vehicle_characteristics_param_file')],
+        remappings=[
+            ("current_pose", "/vehicle/vehicle_kinematic_state"),
+            ("trajectory", "/planning/trajectory"),
+            ("ctrl_cmd", "/vehicle/vehicle_command"),
+            ("ctrl_diag", "/control/control_diagnostic"),
+            ("tf", "/tf"),
         ],
     )
 
@@ -185,14 +200,15 @@ def generate_launch_description():
         lgsvl_interface_param,
         map_publisher_param,
         ndt_localizer_param,
-        mpc_param,
+        pure_pursuit_controller_param,
         pc_filter_transform_param,
         vehicle_characteristics_param,
+        panther_adapter_param,
         urdf_publisher,
         lgsvl_interface,
         map_publisher,
         ndt_localizer,
-        mpc,
+        pure_pursuit_controller,
         filter_transform_os64,
         core_launch,
         adapter_launch,
