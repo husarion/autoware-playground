@@ -36,9 +36,6 @@ def generate_launch_description():
     panther_sim_demo_pkg_prefix = get_package_share_directory('panther_sim_demo')
     autoware_launch_pkg_prefix = get_package_share_directory('autoware_auto_launch')
 
-    ## CUSTOM PARAMS
-    # mpc_param_file = os.path.join(
-    #     panther_sim_demo_pkg_prefix, 'custom_params/mpc_sim.param.yaml')
     pure_pursuit_param_file = os.path.join(
         panther_sim_demo_pkg_prefix, 'custom_params/pure_pursuit.param.yaml')
     pc_filter_transform_param_file = os.path.join(
@@ -48,7 +45,6 @@ def generate_launch_description():
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
-
     map_publisher_param_file = os.path.join(
         avp_demo_pkg_prefix, 'param/avp/map_publisher_sim.param.yaml')
     ndt_localizer_param_file = os.path.join(
@@ -76,11 +72,6 @@ def generate_launch_description():
         default_value=ndt_localizer_param_file,
         description='Path to config file for ndt localizer'
     )
-    # mpc_param = DeclareLaunchArgument(
-    #     'mpc_param_file',
-    #     default_value=mpc_param_file,
-    #     description='Path to config file for MPC'
-    # )
     pure_pursuit_controller_param = DeclareLaunchArgument(
         "pure_pursuit_param_file",
         default_value=pure_pursuit_param_file,
@@ -149,17 +140,6 @@ def generate_launch_description():
             ("observation_republish", "/lidars/points_fused_viz"),
         ]
     )
-    # mpc = Node(
-    #     package='mpc_controller_nodes',
-    #     executable='mpc_controller_node_exe',
-    #     name='mpc_controller_node',
-    #     namespace='control',
-    #     parameters=[
-    #         LaunchConfiguration('mpc_param_file'),
-    #         LaunchConfiguration('vehicle_characteristics_param_file'),
-    #     ],
-    # )
-
     pure_pursuit_controller = Node(
         package="pure_pursuit_nodes",
         executable="pure_pursuit_node_exe",
@@ -183,6 +163,11 @@ def generate_launch_description():
         launch_arguments={}.items()
     )
 
+    vis_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([panther_sim_demo_pkg_prefix, '/launch/autoware_auto_visualization.launch.py']),
+        launch_arguments={}.items()
+    )
+
     point_type_adapter_pkg_prefix = get_package_share_directory(
         'point_type_adapter')
 
@@ -196,7 +181,6 @@ def generate_launch_description():
         lgsvl_interface_param,
         map_publisher_param,
         ndt_localizer_param,
-        # mpc_param,
         pure_pursuit_controller_param,
         pc_filter_transform_param,
         vehicle_characteristics_param,
@@ -204,9 +188,9 @@ def generate_launch_description():
         lgsvl_interface,
         map_publisher,
         ndt_localizer,
-        # mpc,
         pure_pursuit_controller,
         filter_transform_vlp16_front,
         core_launch,
         adapter_launch,
+        vis_launch,
     ])

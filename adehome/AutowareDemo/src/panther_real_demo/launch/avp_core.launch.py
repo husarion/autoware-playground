@@ -43,7 +43,7 @@ def generate_launch_description():
     lanelet2_map_provider_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/lanelet2_map_provider.param.yaml')
     map_osm_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'data/pod_biurem.osm')
+        panther_real_demo_pkg_prefix, 'data/custom_map.osm')
     euclidean_cluster_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/euclidean_cluster.param.yaml')
     ray_ground_classifier_param_file = os.path.join(

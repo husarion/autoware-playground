@@ -47,11 +47,10 @@ def generate_launch_description():
         panther_real_demo_pkg_prefix, 'custom_params/map_publisher.param.yaml')
     panther_adapter_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/panther_adapter.param.yaml')
-
     map_pcd_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'data/pod_biurem.pcd')
+        panther_real_demo_pkg_prefix, 'data/custom_map.pcd')
     map_yaml_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'data/pod_biurem.yaml')
+        panther_real_demo_pkg_prefix, 'data/custom_map.yaml')
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
@@ -187,6 +186,11 @@ def generate_launch_description():
         launch_arguments={}.items()
     )
 
+    vis_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([panther_real_demo_pkg_prefix, '/launch/autoware_auto_visualization.launch.py']),
+        launch_arguments={}.items()
+    )
+
     point_type_adapter_pkg_prefix = get_package_share_directory(
         'point_type_adapter')
 
@@ -213,4 +217,5 @@ def generate_launch_description():
         core_launch,
         adapter_launch,
         panther_adapter,
+        vis_launch,
     ])

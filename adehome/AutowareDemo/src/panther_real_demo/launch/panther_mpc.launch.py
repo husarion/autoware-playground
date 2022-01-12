@@ -45,11 +45,10 @@ def generate_launch_description():
         panther_real_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
     map_publisher_param_file = os.path.join(
         panther_real_demo_pkg_prefix, 'custom_params/map_publisher.param.yaml')
-
     map_pcd_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'data/pod_biurem.pcd')
+        panther_real_demo_pkg_prefix, 'data/custom_map.pcd')
     map_yaml_file = os.path.join(
-        panther_real_demo_pkg_prefix, 'data/pod_biurem.yaml')
+        panther_real_demo_pkg_prefix, 'data/custom_map.yaml')
 
     lgsvl_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/lgsvl_interface.param.yaml')
