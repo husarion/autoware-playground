@@ -12,6 +12,7 @@ rosbags/
 external/
 .dbus
 .rviz2
+.viminfo
 
 # ROS2
 build/

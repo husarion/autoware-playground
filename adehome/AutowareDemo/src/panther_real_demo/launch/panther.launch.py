@@ -35,6 +35,8 @@ def generate_launch_description():
     avp_demo_pkg_prefix = get_package_share_directory('autoware_demos')
     panther_real_demo_pkg_prefix = get_package_share_directory('panther_real_demo')
     autoware_launch_pkg_prefix = get_package_share_directory('autoware_auto_launch')
+    panther_description_pkg_prefix = get_package_share_directory('panther_description')
+
 
     ## CUSTOM PARAMS
     pure_pursuit_param_file = os.path.join(
@@ -58,7 +60,7 @@ def generate_launch_description():
         avp_demo_pkg_prefix, 'param/avp/ndt_localizer_sim.param.yaml')
 
 
-    urdf_path = os.path.join(panther_real_demo_pkg_prefix, 'urdf/panther.urdf')
+    urdf_path = os.path.join(panther_description_pkg_prefix, 'urdf/panther.urdf')
     with open(urdf_path, 'r') as infp:
         urdf_file = infp.read()
 

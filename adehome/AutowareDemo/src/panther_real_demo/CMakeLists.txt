@@ -26,8 +26,6 @@ ament_auto_package(
     INSTALL_TO_SHARE
     launch
     custom_params
-    meshes
-    urdf
     rviz
     data
 )
