@@ -13,6 +13,7 @@ external/
 .dbus
 .rviz2
 .viminfo
+.ros
 
 # ROS2
 build/
