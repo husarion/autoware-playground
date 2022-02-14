@@ -40,6 +40,8 @@ def generate_launch_description():
     ## CUSTOM PARAMS
     vehicle_characteristics_param_file = os.path.join(
         panther_sim_demo_pkg_prefix, 'custom_params/vehicle_characteristics.param.yaml')
+    vehicle_constants_manager_param_file = os.path.join(
+        panther_sim_demo_pkg_prefix, 'custom_params/panther_constants.param.yaml')
     
 
     euclidean_cluster_param_file = os.path.join(
@@ -64,9 +66,6 @@ def generate_launch_description():
         autoware_launch_pkg_prefix, 'param/behavior_planner.param.yaml')
     off_map_obstacles_filter_param_file = os.path.join(
         autoware_launch_pkg_prefix, 'param/off_map_obstacles_filter.param.yaml')
-
-    vehicle_constants_manager_param_file = os.path.join(
-        autoware_launch_pkg_prefix, 'param/lexus_rx_hybrid_2016.param.yaml')
 
     # Arguments
 

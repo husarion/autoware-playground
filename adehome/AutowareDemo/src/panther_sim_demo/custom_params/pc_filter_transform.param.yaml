@@ -21,6 +21,6 @@ lidar_front:
           z:                    0.0
           w:                    1.0
         translation:
-          x:                    0.415
+          x:                    0.385
           y:                    0.0
           z:                    0.21

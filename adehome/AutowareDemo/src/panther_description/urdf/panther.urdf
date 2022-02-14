@@ -1,5 +1,4 @@
 <?xml version="1.0" ?>
-<!-- TODO: Add GPS sensor -->
 <robot name="panther">
   <material name="black">
     <color rgba="0.2 0.2 0.2 1"/>
@@ -8,16 +7,10 @@
     <color rgba="0.1 0.1 0.5 1"/>
   </material>
 
-  <!-- base_link relates to its projection on the ground by this offset:
-    <origin xyz="0 0 0.31" rpy="0 0 0"/>
-  -->
-
-
   <link name="base_link">
     <visual>
       <geometry>
-        <!-- <mesh filename="file:///home/nicolas/AutowareAuto/src/urdf/lexus_rx_450h_description/meshes/Panther_v1.0.stl" scale="0.001 0.001 0.001"/> -->
-        <mesh filename="package://panther_sim_demo/meshes/Panther_v1.0.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://panther_description/meshes/Panther_v1.0.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="black"/>
       <origin xyz="0.23 0 0" rpy="1.570796 0 1.570796"/>
@@ -29,7 +22,6 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </collision>
     <inertial>
-      <!-- TODO: Get or calculate inertia values -->
       <origin xyz="0 0 0.013" rpy="0 0 0"/>
       <mass value="0.25"/>
       <inertia ixx="0.0003350833" ixy="0" ixz="0"
@@ -76,7 +68,6 @@
       </geometry>
     </collision>
     <inertial>
-      <!-- TODO: Get or calculate inertia values -->
       <mass value="0.1"/>
       <inertia ixx="1.02083e-5" ixy="0" ixz="0"
         iyy="1.02083e-5" iyz="0"
