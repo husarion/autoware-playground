@@ -1,5 +1,8 @@
 #  Sim demo of Autoware.Auto on Panther robot
 
+This repo contains source code to run Autoware.Auto with Panther robot in simulation.
+
+If you want to installit follow instructions [here](https://husarion.com/tutorials/ros2-tutorials/autoware-auto-sim-demo/)
 
 ## File structure
 
