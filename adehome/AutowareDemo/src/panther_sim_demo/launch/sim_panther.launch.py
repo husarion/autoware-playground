@@ -37,6 +37,11 @@ def generate_launch_description():
     autoware_launch_pkg_prefix = get_package_share_directory('autoware_auto_launch')
     panther_description_pkg_prefix = get_package_share_directory('panther_description')
 
+    map_pcd_file = os.path.join(
+        avp_demo_pkg_prefix, 'data/autonomoustuff_parking_lot_lgsvl.pcd')
+    map_yaml_file = os.path.join(
+        avp_demo_pkg_prefix, 'data/autonomoustuff_parking_lot_lgsvl.yaml')
+
     pure_pursuit_param_file = os.path.join(
         panther_sim_demo_pkg_prefix, 'custom_params/pure_pursuit.param.yaml')
     pc_filter_transform_param_file = os.path.join(
@@ -122,7 +127,9 @@ def generate_launch_description():
         package='ndt_nodes',
         executable='ndt_map_publisher_exe',
         namespace='localization',
-        parameters=[LaunchConfiguration('map_publisher_param_file')]
+        parameters=[LaunchConfiguration('map_publisher_param_file'),
+                    {"map_pcd_file": map_pcd_file,
+                     "map_yaml_file": map_yaml_file}]
     )
     urdf_publisher = Node(
         package='robot_state_publisher',
