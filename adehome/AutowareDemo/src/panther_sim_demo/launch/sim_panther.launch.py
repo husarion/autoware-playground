@@ -38,9 +38,9 @@ def generate_launch_description():
     panther_description_pkg_prefix = get_package_share_directory('panther_description')
 
     map_pcd_file = os.path.join(
-        avp_demo_pkg_prefix, 'data/autonomoustuff_parking_lot_lgsvl.pcd')
+        '/opt/AutowareAuto/share/autoware_demos/data/autonomoustuff_parking_lot.pcd')
     map_yaml_file = os.path.join(
-        avp_demo_pkg_prefix, 'data/autonomoustuff_parking_lot_lgsvl.yaml')
+        '/opt/AutowareAuto/share/autoware_demos/data/autonomoustuff_parking_lot.yaml')
 
     pure_pursuit_param_file = os.path.join(
         panther_sim_demo_pkg_prefix, 'custom_params/pure_pursuit.param.yaml')

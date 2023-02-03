@@ -2,9 +2,21 @@ repositories:
   src/external/autoware_auto_msgs:
     type: git
     url: https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs.git
-    version: 34d98a6173ae02572fef10ebc47a2916c2b0d395
-  src/external/rosbridge_suite:
+    version: ad575110c7ec4a22713ec164d5dba31d741ccd8b
+  src/external/grid_map:
     type: git
-    url: https://github.com/RobotWebTools/rosbridge_suite.git
-    version: 1a2c386455067b00a9e67fb70cc711add38c3582
+    url: https://github.com/ANYbotics/grid_map.git
+    version: 869c5d56f05c01c73e0ef8fa30c85ba7f68f8558
+  src/external/transport_drivers:
+    type: git
+    url: https://github.com/ros-drivers/transport_drivers.git
+    version: 0140e5e7c0702a675472ee0e5bff22955e45729c
+  src/external/vesc:
+    type: git
+    url: https://github.com/f1tenth/vesc
+    version: ros2
+  src/external/lgsvl_python_api:
+    type: git
+    url: https://github.com/lgsvl/PythonAPI.git
+    version: 9bc29c9aee5e98d4d99e6a410c04b153b8f7feef
 
